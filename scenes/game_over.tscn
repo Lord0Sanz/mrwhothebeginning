@@ -1,0 +1,231 @@
+[gd_scene load_steps=23 format=3 uid="uid://60jsx7fuwrrg"]
+
+[ext_resource type="Script" uid="uid://dtu665i770ner" path="res://scripts/game_over.gd" id="1_wqhvx"]
+[ext_resource type="FontFile" uid="uid://bf5b647ck5qce" path="res://assets/font/Chris.ttf" id="1_xeevv"]
+[ext_resource type="AudioStream" uid="uid://bvgmt3y1sjq6y" path="res://assets/audio/gameover.ogg" id="3_tbwuq"]
+[ext_resource type="Shader" uid="uid://d2dsv0qkm7a26" path="res://assets/shaders/vhs.gdshader" id="4_racf3"]
+[ext_resource type="AudioStream" uid="uid://dlyk7i8uisofr" path="res://assets/audio/bgm_mainmenu.ogg" id="5_7m3ot"]
+[ext_resource type="AudioStream" uid="uid://tcc0fw3uit85" path="res://assets/audio/ui_click.ogg" id="6_v3hpu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xeevv"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wqhvx"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tbwuq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_racf3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7m3ot"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_v3hpu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_irg28"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2jtsn"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8bugq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wawo4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_56v3a"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7m3ot"]
+shader = ExtResource("4_racf3")
+shader_parameter/overlay = false
+shader_parameter/resolution = Vector2(640, 480)
+shader_parameter/brightness = 1.0
+shader_parameter/scanlines_opacity = 0.1
+shader_parameter/scanlines_width = 0.5
+shader_parameter/grille_opacity = 0.0
+shader_parameter/roll = false
+shader_parameter/roll_speed = 0.0
+shader_parameter/roll_size = 0.0
+shader_parameter/roll_variation = 0.1
+shader_parameter/distort_intensity = 0.05
+shader_parameter/aberration = 4.75e-08
+shader_parameter/noise_opacity = 0.4
+shader_parameter/noise_speed = 5.0
+shader_parameter/static_noise_intensity = 0.25
+shader_parameter/pixelate = false
+shader_parameter/discolor = false
+shader_parameter/warp_amount = 0.125
+shader_parameter/clip_warp = false
+shader_parameter/vignette_intensity = 0.0
+shader_parameter/vignette_opacity = 0.1
+
+[sub_resource type="Animation" id="Animation_5pajh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_7b55j"]
+resource_name = "fade"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_j7ex8"]
+resource_name = "fade_in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0333334, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5pajh"]
+_data = {
+&"RESET": SubResource("Animation_5pajh"),
+&"fade": SubResource("Animation_7b55j"),
+&"fade_in": SubResource("Animation_j7ex8")
+}
+
+[node name="GameOver" type="Node3D"]
+script = ExtResource("1_wqhvx")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="title" type="Label" parent="ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("1_xeevv")
+theme_override_font_sizes/font_size = 70
+text = "GAME OVER"
+horizontal_alignment = 1
+
+[node name="randomtitle" type="Label" parent="ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("1_xeevv")
+theme_override_font_sizes/font_size = 70
+text = "ENDING TITILE"
+horizontal_alignment = 1
+
+[node name="retry" type="Button" parent="ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_hover_color = Color(0.29219, 0.29219, 0.29219, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(0.118581, 0.118581, 0.118581, 1)
+theme_override_fonts/font = ExtResource("1_xeevv")
+theme_override_font_sizes/font_size = 70
+theme_override_styles/focus = SubResource("StyleBoxEmpty_xeevv")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_wqhvx")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_tbwuq")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_racf3")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_7m3ot")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_v3hpu")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_irg28")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_2jtsn")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_8bugq")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_wawo4")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_56v3a")
+text = "ReTrY"
+
+[node name="mainmenu" type="Button" parent="ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_hover_color = Color(0.29219, 0.29219, 0.29219, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(0.118581, 0.118581, 0.118581, 1)
+theme_override_fonts/font = ExtResource("1_xeevv")
+theme_override_font_sizes/font_size = 70
+theme_override_styles/focus = SubResource("StyleBoxEmpty_xeevv")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_wqhvx")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_tbwuq")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_racf3")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_7m3ot")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_v3hpu")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_irg28")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_2jtsn")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_8bugq")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_wawo4")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_56v3a")
+text = "BaCk tO MaiN MEnu"
+
+[node name="Gameover" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_tbwuq")
+volume_db = -10.0
+autoplay = true
+
+[node name="Vhs" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_7m3ot")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="BgmMainmenu" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_7m3ot")
+volume_db = -15.0
+autoplay = true
+
+[node name="UiClick" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_v3hpu")
+volume_db = -10.0
+
+[node name="Fade_change" type="ColorRect" parent="."]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Fade_change"]
+libraries = {
+&"": SubResource("AnimationLibrary_5pajh")
+}
+autoplay = "fade_in"
+
+[connection signal="pressed" from="ColorRect/MarginContainer/VBoxContainer/retry" to="." method="_on_retry_pressed"]
+[connection signal="pressed" from="ColorRect/MarginContainer/VBoxContainer/mainmenu" to="." method="_on_mainmenu_pressed"]

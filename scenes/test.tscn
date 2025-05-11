@@ -1,0 +1,60 @@
+[gd_scene load_steps=8 format=3 uid="uid://c4832qgl1gm2m"]
+
+[ext_resource type="PackedScene" uid="uid://b6mjw66wyc380" path="res://assets/prototype.tscn" id="1_errlg"]
+[ext_resource type="PackedScene" uid="uid://dh6jkafo5k0hh" path="res://scenes/player_main.tscn" id="2_bl13t"]
+[ext_resource type="Shader" uid="uid://bs5w0d0nhaeon" path="res://assets/shaders/psx.gdshader" id="3_iyx0m"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_bl13t"]
+sky_top_color = Color(0.263766, 0.318799, 0.395342, 1)
+sky_horizon_color = Color(0, 0, 0, 1)
+ground_bottom_color = Color(0, 0, 0, 1)
+ground_horizon_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Sky" id="Sky_iyx0m"]
+sky_material = SubResource("ProceduralSkyMaterial_bl13t")
+
+[sub_resource type="Environment" id="Environment_74lek"]
+background_mode = 1
+sky = SubResource("Sky_iyx0m")
+tonemap_mode = 2
+fog_enabled = true
+fog_light_color = Color(0.350081, 0.380495, 0.428303, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_74lek"]
+shader = ExtResource("3_iyx0m")
+shader_parameter/pixel_scale = 2.0
+shader_parameter/grayscale = false
+
+[node name="TEST" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+light_energy = 0.01
+sky_mode = 1
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_74lek")
+
+[node name="Prototype" parent="." instance=ExtResource("1_errlg")]
+
+[node name="Player" parent="." groups=["Player"] instance=ExtResource("2_bl13t")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -7, 0, 9)
+collision_layer = 3
+collision_mask = 3
+move_speed = 2.5
+
+[node name="Filter" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_74lek")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 2, 0)
+visible = false
+light_color = Color(0.881997, 0.776566, 0.355093, 1)
+light_energy = 2.0
